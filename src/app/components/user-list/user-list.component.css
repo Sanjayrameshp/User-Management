@@ -1,0 +1,31 @@
+.main .bio {
+    width: 90%;
+    height: 60px;
+}
+.main .table td, .table th {
+    padding: 15px;
+}
+.main span .fa-check, .main span .fa-xmark {
+    font-size: 18px;
+}
+.main .table .thead-dark th {
+    background-color: rgb(153, 157, 157);
+    color: #ffffff;
+    text-align: center;
+}
+.main .pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.main .edit-icon, .main .update-icons {
+    text-align: center;
+}
+.main .edit-icon .fa-pen{
+    font-size: 20px;
+    color: rgb(5, 63, 121);
+}
+.main .update-icons i{
+    font-size: 20px;
+    color: rgb(5, 63, 121);
+}

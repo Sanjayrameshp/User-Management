@@ -1,0 +1,56 @@
+<div class="main">
+    @if (allUsers) {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                @for (header of tableHeaders; track header) {
+                                    <th scope="col">{{ header | titlecase }}</th>
+                                }
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (user of allUsers | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; track user.id) {
+                                <tr style="cursor: pointer;">
+                                    @if (!user.edit) {
+                                        @for (header of tableHeaders; track header) {
+                                            <td (click)="navigateToUserDetails(user.id)">{{user[header] | trim :80}}</td>
+                                        }
+                                         <td class="edit-icon" (click)="enableUserEdit(user.id, $event)"><i class="fa-solid fa-pen"></i></td>
+    
+                                    } @else {
+                                        @for (header of tableHeaders; track header) {
+                                                    @if (user[header].length > 60) {
+                                                        <td><textarea class="bio form-control" [(ngModel)]="user[header]"></textarea></td>
+                                                    } @else {
+                                                        <td><input class="form-control" type="text" [(ngModel)]="user[header]"></td>
+                                                    }
+                                        }
+                                        <td class="update-icons"><span (click)="updateUser(user.id)"><i class="fa-solid fa-check"></i></span>
+                                            <span (click)="cancelEdit()"><i class="fa-solid fa-xmark"></i></span></td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row pagination">
+                <div class="col-md-12 pagination-controls">
+                    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    } @else {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 style="text-align: center;">No Data Found</h2>
+                </div>
+            </div>
+        </div>
+    }
+</div>

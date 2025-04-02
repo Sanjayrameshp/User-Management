@@ -1,0 +1,41 @@
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="home">
+                    <i class="fa-solid fa-house" [routerLink]="['/user-list']"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="header-section">
+                    <h2>User Details</h2>
+                </div>
+                @if (showDetails) {
+                    <div class="details-section">
+                        <table style="width: 100%;">
+                            <tbody>
+                                @for (key of objectKeys(selectedUser); track key) {
+                                    <tr>
+                                        <td class="col-md-4 fw-bold">{{ key }}</td>
+                                        <td class="col-md-8">{{ selectedUser[key] }}</td>
+                                      </tr>
+                                  }
+                            </tbody>
+                        </table>
+    
+                    </div>
+                } @else {
+                    <div class="details-section">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>No Details Found</h3>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

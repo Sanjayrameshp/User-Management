@@ -1,0 +1,18 @@
+.main .header-section h2 {
+    text-align: center;
+    color: rgb(5, 63, 121);
+}
+.main .details-section tr {
+    border: 2px solid #9c9595;
+}
+.main .details-section tr td.col-md-4, .main .details-section tr td.col-md-8 {
+    padding: 15px 20px;
+}
+.main .details-section tr td.col-md-4 {
+    border-right: 2px solid;
+}
+.main .home .fa-house {
+    cursor: pointer;
+    font-size: 18px;
+    color: rgb(5, 63, 121);
+}

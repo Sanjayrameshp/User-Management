@@ -1,0 +1,17 @@
+.header {
+    width: 100%;
+}
+.header h1 {
+    color: #ffffff;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+.header h4 {
+    color: #ffffff;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
