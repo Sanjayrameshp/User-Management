@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { TrimPipe } from "../../pipes/trim.pipe";
 import { Router } from '@angular/router';
 
@@ -18,8 +18,8 @@ export class UserListComponent implements OnInit{
 
   allUsers: any = [];
   tableHeaders: string[] = [];
-  currentPage = 1;
-  itemsPerPage = 10;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
 
   private userService = inject(UserService);
   private router = inject(Router);
@@ -31,23 +31,22 @@ export class UserListComponent implements OnInit{
     this.userService.allUsers$.subscribe(users => {
       this.allUsers = users;
       if (users.length > 0) {
-        this.tableHeaders = Object.keys(users[0]).filter(header => header !== "edit");
+        this.tableHeaders = Object.keys(users[0]).filter(header => header !== "edit"  && header !== "index");
       }
     });
   }
 
-  enableUserEdit(userId: string, event: Event) {
+  enableUserEdit(index: number, event: Event) {
     event.stopPropagation();
-    this.allUsers = this.allUsers.map((user:any) =>
-      user.id === userId ? { ...user, edit: true } : { ...user, edit: false }
+    this.allUsers = this.allUsers.map((user: any) =>
+      user.index === index ? { ...user, edit: true } : { ...user, edit: false }
     );
-    
   }
 
-  updateUser(userId: string) {
-    const updatedUser = this.allUsers.find((user:any) => user.id === userId);
+  updateUser(index: number) {
+    const updatedUser = this.allUsers.find((user: any) => user.index === index);
     if (updatedUser) {
-      this.userService.updateUser(userId, updatedUser);
+      this.userService.updateUserByIndex(index, updatedUser);
       this.allUsers = [...this.userService.getUsers()];
     }
   }
@@ -56,8 +55,8 @@ export class UserListComponent implements OnInit{
     this.allUsers = [...this.userService.getUsers()];
   }
   
-  navigateToUserDetails(userId : string) {
-    this.router.navigate(['/user-details',userId])
+  navigateToUserDetails(index: number) {
+    this.router.navigate(['/user-details', index]);
   }
 
 }

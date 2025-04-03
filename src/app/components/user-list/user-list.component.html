@@ -13,13 +13,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (user of allUsers | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; track user.id) {
+                            @for (user of allUsers | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; track user) {
                                 <tr style="cursor: pointer;">
                                     @if (!user.edit) {
                                         @for (header of tableHeaders; track header) {
-                                            <td (click)="navigateToUserDetails(user.id)">{{user[header] | trim :80}}</td>
+                                            <td (click)="navigateToUserDetails(user.index)">{{user[header] | trim :80}}</td>
                                         }
-                                         <td class="edit-icon" (click)="enableUserEdit(user.id, $event)"><i class="fa-solid fa-pen"></i></td>
+                                         <td class="edit-icon" (click)="enableUserEdit(user.index, $event)"><i class="fa-solid fa-pen"></i></td>
     
                                     } @else {
                                         @for (header of tableHeaders; track header) {
@@ -29,7 +29,7 @@
                                                         <td><input class="form-control" type="text" [(ngModel)]="user[header]"></td>
                                                     }
                                         }
-                                        <td class="update-icons"><span (click)="updateUser(user.id)"><i class="fa-solid fa-check"></i></span>
+                                        <td class="update-icons"><span (click)="updateUser(user.index)"><i class="fa-solid fa-check"></i></span>
                                             <span (click)="cancelEdit()"><i class="fa-solid fa-xmark"></i></span></td>
                                     }
                                 </tr>

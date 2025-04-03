@@ -14,35 +14,36 @@ export class UserDetailsComponent implements OnInit{
   activatedRoute = inject(ActivatedRoute);
   userService = inject(UserService)
 
-  userId = signal('');
+  userId = signal<number | null>(null);
   selectedUser: { [key: string]: any } = {};
   tableHeaders: string[] = [];
   showDetails : boolean = false;
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-    this.userId.set(params.get('userid') || '');
-    const existingUsers = this.userService.getUsers();
-    
-    if (existingUsers.length > 0) {
-      this.getUserDetails(existingUsers);
-    } else {
-      this.userService.getAllUsers().subscribe(users => {
-        this.getUserDetails(users);
-      });
-    }
-  });
-    
+      const idParam = params.get('userid');
+      this.userId.set(idParam ? parseInt(idParam) : null);
+      
+      const existingUsers = this.userService.getUsers();
+      
+      if (existingUsers.length > 0) {
+        this.getUserDetails(existingUsers);
+      } else {
+        this.userService.getAllUsers().subscribe(users => {
+          this.getUserDetails(users);
+        });
+      }
+    });
   }
 
   getUserDetails(users?: any[]): void {
     const allUsers = users || this.userService.getUsers();
-    this.selectedUser = allUsers.find(user => user.id === this.userId());
+    this.selectedUser = allUsers.find(user => user.index === this.userId());
     this.showDetails = !!this.selectedUser;
   }
 
   objectKeys(obj: any): string[] {
-    return Object.keys(obj).filter(key => key !== "edit");;
+    return Object.keys(obj).filter(key => key !== "edit" && key !== 'index');
   }
 
 
